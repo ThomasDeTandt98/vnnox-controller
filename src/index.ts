@@ -1,10 +1,12 @@
 import 'dotenv/config';
-import { getPlayerList } from "./api";
+import { getPlayerList, restartPlayer } from "./api";
+import { Player } from './models/playerInfo';
 
 
 async function main() {
     try {
-        await getPlayerList();
+        var playerList: Player[] = await getPlayerList();
+        await restartPlayer(playerList.map(player => player.playerId));
     } catch (err) {
         console.log(err)
     }
